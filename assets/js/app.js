@@ -19,14 +19,6 @@
   const byId = (id) => PRODUCTS.find((p) => p.id === id);
   const waLink = (text) => `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(text)}`;
 
-  const ICONS = {
-    sofa: '<svg viewBox="0 0 32 32"><path d="M6 15v-3a4 4 0 0 1 4-4h12a4 4 0 0 1 4 4v3"/><path d="M4 23v-6a2 2 0 0 1 4 0v2h16v-2a2 2 0 0 1 4 0v6Z"/><path d="M7 23v3M25 23v3"/></svg>',
-    car: '<svg viewBox="0 0 32 32"><path d="M5 19l2.5-7A3 3 0 0 1 10.3 10h11.4a3 3 0 0 1 2.8 2l2.5 7"/><rect x="3" y="19" width="26" height="6" rx="2"/><circle cx="9" cy="22" r="1"/><circle cx="23" cy="22" r="1"/><path d="M6 25v2M26 25v2"/></svg>',
-    wave: '<svg viewBox="0 0 32 32"><path d="M3 21c3 0 3-2 6.5-2s3.5 2 6.5 2 3-2 6.5-2 3.5 2 6.5 2"/><path d="M3 26c3 0 3-2 6.5-2s3.5 2 6.5 2 3-2 6.5-2 3.5 2 6.5 2"/><path d="M16 4v11M16 4l7 9h-7"/></svg>',
-    cross: '<svg viewBox="0 0 32 32"><path d="M12 4h8v8h8v8h-8v8h-8v-8H4v-8h8Z"/></svg>',
-    bag: '<svg viewBox="0 0 32 32"><path d="M6 11h20l-1.5 15a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2Z"/><path d="M11 11V9a5 5 0 0 1 10 0v2"/></svg>',
-    leaf: '<svg viewBox="0 0 32 32"><path d="M6 26C6 13 13 6 26 6c0 13-7 20-20 20Z"/><path d="M6 26 18 14"/></svg>'
-  };
   const SECTOR_COPY = {
     tapiceria: "Sofás, butacas, cabeceros y mobiliario comercial.",
     automotriz: "Asientos, paneles y techos que soportan el sol.",
@@ -87,21 +79,22 @@
   function renderGrid() {
     const list = filtered();
     $("#empty").hidden = list.length > 0;
+    $("#ref-count").textContent = list.length;
     $("#product-grid").innerHTML = list.map((p, i) => {
       const badges = [
         p.destacado ? '<span class="badge badge--gold">Destacado</span>' : "",
         p.nuevo ? '<span class="badge">Nuevo</span>' : "",
         p.precioAntes ? `<span class="badge badge--off">−${Math.round((1 - p.precio / p.precioAntes) * 100)}%</span>` : ""
       ].join("");
-      const dots = p.colores.slice(0, 7).map((c, ci) =>
+      const dots = p.colores.slice(0, 6).map((c, ci) =>
         `<button class="dot${ci === 0 ? " active" : ""}" style="--c:${esc(c.hex)}" data-dot="${ci}" title="${esc(c.nombre)}" aria-label="${esc(c.nombre)}"></button>`).join("");
-      const more = p.colores.length > 7 ? `<span class="muted" style="font-size:12px;align-self:center">+${p.colores.length - 7}</span>` : "";
+      const more = p.colores.length > 6 ? `<span class="card__more">+${p.colores.length - 6}</span>` : "";
       return `
         <article class="card" data-id="${esc(p.id)}" style="animation-delay:${Math.min(i, 8) * 50}ms">
           <div class="card__media" data-open>
             <div class="card__badges">${badges}</div>
             ${swatch(p)}
-            <button class="card__quick" data-open>Ver y comprar</button>
+            <button class="card__quick" data-open>Elegir color y metros</button>
           </div>
           <div class="card__body">
             <div class="card__top">
@@ -109,8 +102,10 @@
               <span class="price">${priceHTML(p)}</span>
             </div>
             <p class="card__line">${esc(p.linea)}</p>
-            <span class="card__stock${p.stock === false ? " pedido" : ""}">${p.stock === false ? "Bajo pedido" : "Disponible"} · ${esc(p.ancho)}</span>
-            <div class="card__dots">${dots}${more}</div>
+            <div class="card__meta">
+              <div class="card__dots">${dots}${more}</div>
+              <span class="card__stock${p.stock === false ? " pedido" : ""}">${p.stock === false ? "Bajo pedido" : esc(p.ancho)}</span>
+            </div>
           </div>
         </article>`;
     }).join("");
@@ -118,14 +113,20 @@
 
   /* ---------------- Sectores / pagos / footer ---------------- */
   function renderStatic() {
-    $("#sectors").innerHTML = Object.entries(CATS).map(([k, v]) => `
-      <button class="sector" data-sector="${k}">
-        <span class="sector__arrow">↗</span>
-        ${ICONS[v.icono] || ""}
-        <div><h3>${esc(v.nombre)}</h3><p>${esc(SECTOR_COPY[k] || "")}</p></div>
-      </button>`).join("");
+    $("#sectors").innerHTML = Object.entries(CATS).map(([k, v], i) => {
+      const tones = PRODUCTS.filter((p) => p.categoria === k).flatMap((p) => p.colores).slice(0, 5);
+      return `
+      <button class="index__row" data-sector="${k}">
+        <span class="index__n">${String(i + 1).padStart(2, "0")}</span>
+        <span><span class="index__name">${esc(v.nombre)}</span>
+          <span class="index__chips">${tones.map((c) => `<i style="--c:${esc(c.hex)}"></i>`).join("")}</span></span>
+        <span class="index__desc">${esc(SECTOR_COPY[k] || "")}</span>
+        <span class="index__go"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>`;
+    }).join("");
 
-    $("#payments").innerHTML = CFG.metodosPago.map((m) => `<span>${esc(m.nombre)}</span>`).join("");
+    $("#payments").innerHTML = "<b>Formas de pago</b>" + CFG.metodosPago.map((m) => `<span>${esc(m.nombre)}</span>`).join("");
+    $("#contact-mail").href = "mailto:" + CFG.email;
     $("#footer-cats").innerHTML = Object.entries(CATS).map(([k, v]) => `<li><a href="#catalogo" data-sector="${k}">${esc(v.nombre)}</a></li>`).join("");
     $("#footer-contact").innerHTML = `
       <li><a href="${waLink("Hola, quiero información sobre sus materiales.")}" target="_blank" rel="noopener">WhatsApp</a></li>
@@ -140,10 +141,14 @@
     $("#contact-cta").href = hello;
     $("#wholesale-cta").href = waLink("Hola, quiero cotizar precios al mayor. Empresa: ___  Material: ___  Metros aprox.: ___");
 
-    // Pila de muestras del hero
-    const hero = byId("vertice-pu") || PRODUCTS[0];
-    const picks = [hero.colores[2], hero.colores[4], hero.colores[0]].filter(Boolean);
-    $("#swatch-stack").innerHTML = picks.map((c) => `<div class="swatch" style="--c:${esc(c.hex)}"></div>`).join("");
+    // Libro de muestras del hero: [producto, índice de color]
+    const picks = [["vertice-pu", 2], ["vertice-pu", 0], ["marina-pro", 1], ["vertice-pu", 4], ["nobuk-soft", 0]]
+      .map(([id, ci]) => [byId(id), ci]).filter(([p]) => p && p.colores[0]);
+    $("#swatch-book").innerHTML = picks.map(([p, ci]) => {
+      const c = p.colores[ci] || p.colores[0];
+      return `<figure data-product="${esc(p.id)}" data-color="${ci}"><div class="swatch" style="--c:${esc(c.hex)}"></div>
+        <figcaption><b>${esc(p.nombre)}</b><span>${esc(c.nombre)}</span></figcaption></figure>`;
+    }).join("");
   }
 
   /* ---------------- Ficha de producto ---------------- */
@@ -235,7 +240,6 @@
     const count = cart.length;
     const cc = $("#cart-count");
     cc.textContent = count;
-    cc.classList.toggle("show", count > 0);
 
     $("#cart-empty").hidden = count > 0;
     $("#cart-foot").hidden = count === 0;
@@ -386,7 +390,7 @@
         $("#catalogo").scrollIntoView({ behavior: "smooth" });
       }
       const dp = e.target.closest("[data-product]");
-      if (dp) openProduct(dp.dataset.product);
+      if (dp) openProduct(dp.dataset.product, +(dp.dataset.color || 0));
     });
 
     // Modal

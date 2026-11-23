@@ -5,45 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Universal de Sintéticos Venezuela · Cueros sintéticos premium</title>
   <meta name="description" content="Cueros sintéticos, semicueros y textiles recubiertos para tapicería, automotriz, náutico, salud y calzado. Venta al detal y al mayor con envío a toda Venezuela.">
-  <meta name="theme-color" content="#0f0e0d">
+  <meta name="theme-color" content="#f7f4ef">
   <meta property="og:title" content="Universal de Sintéticos Venezuela">
   <meta property="og:description" content="Superficies sintéticas premium para tapicería, automotriz, náutico, salud y calzado. Envíos a toda Venezuela.">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
   <!-- ============ BARRA SUPERIOR ============ -->
   <div class="topbar">
-    <div class="marquee"><div class="marquee__track" id="topbar-track">
-      <span>Envíos a toda Venezuela</span><span>Pago Móvil · Zelle · Binance · Efectivo</span><span>Precios al mayor desde 50 m</span><span>Asesoría técnica sin costo</span>
-      <span>Envíos a toda Venezuela</span><span>Pago Móvil · Zelle · Binance · Efectivo</span><span>Precios al mayor desde 50 m</span><span>Asesoría técnica sin costo</span>
-    </div></div>
+    <div class="container topbar__inner">
+      <span>Pago Móvil · Zelle · Binance · Efectivo</span>
+      <span>Envíos a toda Venezuela en 24 horas</span>
+      <span>Tarifas al mayor desde 50 m</span>
+    </div>
   </div>
 
   <!-- ============ NAVEGACIÓN ============ -->
   <header class="nav" id="nav">
     <div class="container nav__inner">
-      <a href="#inicio" class="brand" aria-label="Universal de Sintéticos — inicio">
-        <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="10" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 11v10a8 8 0 0 0 16 0V11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M12 30h16" stroke="var(--gold)" stroke-width="2.2" stroke-linecap="round"/></svg>
-        <span class="brand__text"><strong>Universal</strong><small>de Sintéticos · Venezuela</small></span>
-      </a>
       <nav class="nav__links" id="nav-links">
         <a href="#catalogo">Catálogo</a>
         <a href="#sectores">Sectores</a>
-        <a href="#como-comprar">Cómo comprar</a>
         <a href="#mayoristas">Mayoristas</a>
         <a href="#contacto">Contacto</a>
       </nav>
+      <button class="icon-btn menu-btn" id="menu-btn" aria-label="Menú"><svg viewBox="0 0 24 24"><path d="M4 9h16M4 15h16"/></svg></button>
+      <a href="#inicio" class="brand" aria-label="Universal de Sintéticos — inicio">
+        <strong>Universal</strong>
+        <small>de Sintéticos · Venezuela</small>
+      </a>
       <div class="nav__actions">
         <button class="icon-btn cart-btn" id="open-cart" aria-label="Abrir carrito">
-          <svg viewBox="0 0 24 24"><path d="M5 7h14l-1.2 11.1a2 2 0 0 1-2 1.9H8.2a2 2 0 0 1-2-1.9L5 7Z"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg>
-          <span class="cart-count" id="cart-count">0</span>
+          <span class="cart-label">Carrito</span> <span class="cart-count" id="cart-count">0</span>
         </button>
-        <button class="icon-btn menu-btn" id="menu-btn" aria-label="Menú"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></svg></button>
       </div>
     </div>
   </header>
@@ -51,48 +50,37 @@
   <main>
     <!-- ============ HERO ============ -->
     <section class="hero" id="inicio">
-      <div class="hero__glow"></div>
-      <div class="container hero__grid">
-        <div class="hero__copy">
-          <p class="eyebrow reveal">Textiles recubiertos · Hecho para el trópico</p>
-          <h1 class="display reveal">Superficies que <em>elevan</em> cada diseño.</h1>
-          <p class="lead reveal">Cueros sintéticos y semicueros premium para tapicería, automotriz, náutico, salud y calzado. Elige tu color, indica los metros y recibe tu pedido en cualquier rincón de Venezuela.</p>
-          <div class="hero__cta reveal">
-            <a href="#catalogo" class="btn btn--gold">Comprar ahora</a>
-            <button class="btn btn--ghost" data-product="muestrario">Pedir muestrario</button>
+      <div class="container">
+        <div class="hero__grid">
+          <div class="hero__copy">
+            <p class="eyebrow reveal">Colección 2026 · Textiles recubiertos</p>
+            <h1 class="display reveal">El material correcto para cada <em>superficie.</em></h1>
+            <p class="lead reveal">Cueros sintéticos y semicueros para tapicería, automotriz, náutico, salud y calzado. Cortamos al metro y despachamos a todo el país.</p>
+            <div class="hero__cta reveal">
+              <a href="#catalogo" class="btn btn--gold">Ver catálogo</a>
+              <button class="link" data-product="muestrario">Solicitar muestrario →</button>
+            </div>
           </div>
-          <dl class="stats reveal">
-            <div><dt>+60</dt><dd>colores y texturas</dd></div>
-            <div><dt>24 h</dt><dd>despacho nacional</dd></div>
-            <div><dt>100k</dt><dd>ciclos de abrasión</dd></div>
-          </dl>
-        </div>
-        <div class="hero__visual" aria-hidden="true">
-          <div class="swatch-stack" id="swatch-stack"></div>
-          <div class="hero__badge">
-            <span>Línea</span><strong>Vértice</strong><small>PU premium · 1,40 m</small>
-          </div>
+          <div class="book reveal" id="swatch-book" aria-label="Muestras destacadas"></div>
         </div>
       </div>
     </section>
 
-    <!-- ============ SECTORES (marquee) ============ -->
-    <section class="sector-strip">
-      <div class="marquee"><div class="marquee__track marquee__track--slow">
-        <span>Tapicería</span><i>✦</i><span>Automotriz</span><i>✦</i><span>Náutico</span><i>✦</i><span>Hotelería</span><i>✦</i><span>Clínicas</span><i>✦</i><span>Calzado</span><i>✦</i><span>Marroquinería</span><i>✦</i><span>Arquitectura</span><i>✦</i>
-        <span>Tapicería</span><i>✦</i><span>Automotriz</span><i>✦</i><span>Náutico</span><i>✦</i><span>Hotelería</span><i>✦</i><span>Clínicas</span><i>✦</i><span>Calzado</span><i>✦</i><span>Marroquinería</span><i>✦</i><span>Arquitectura</span><i>✦</i>
-      </div></div>
-    </section>
+    <div class="container">
+      <div class="facts">
+        <div><strong>+60</strong><span>referencias en stock</span></div>
+        <div><strong>1 metro</strong><span>compra mínima por color</span></div>
+        <div><strong>24 horas</strong><span>despacho nacional</span></div>
+        <div><strong>Bs. o USD</strong><span>paga como prefieras</span></div>
+      </div>
+    </div>
 
     <!-- ============ CATÁLOGO ============ -->
     <section class="section" id="catalogo">
       <div class="container">
         <div class="section__head">
-          <div>
-            <p class="eyebrow">Catálogo 2026</p>
-            <h2 class="title">Elige tu material</h2>
-          </div>
-          <p class="muted">Precios por metro lineal en USD. Pide desde 1 metro o consulta tarifas al mayor.</p>
+          <h2 class="title">Catálogo<span class="count" id="ref-count"></span></h2>
+          <p class="muted">Precios por metro lineal en dólares. Elige el color, indica los metros y envía tu pedido.</p>
         </div>
 
         <div class="toolbar">
@@ -100,13 +88,13 @@
           <div class="toolbar__right">
             <label class="search">
               <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/></svg>
-              <input type="search" id="search" placeholder="Buscar material, color o uso…" autocomplete="off">
+              <input type="search" id="search" placeholder="Buscar material, color o uso" autocomplete="off">
             </label>
             <select id="sort" class="select" aria-label="Ordenar">
               <option value="destacados">Destacados</option>
-              <option value="precio-asc">Precio: menor a mayor</option>
-              <option value="precio-desc">Precio: mayor a menor</option>
-              <option value="nombre">Nombre A–Z</option>
+              <option value="precio-asc">Menor precio</option>
+              <option value="precio-desc">Mayor precio</option>
+              <option value="nombre">A – Z</option>
             </select>
           </div>
         </div>
@@ -117,94 +105,75 @@
     </section>
 
     <!-- ============ SECTORES ============ -->
-    <section class="section section--alt" id="sectores">
+    <section class="section section--tight" id="sectores">
       <div class="container">
         <div class="section__head">
-          <div>
-            <p class="eyebrow">Soluciones por sector</p>
-            <h2 class="title">Un material para cada exigencia</h2>
-          </div>
+          <h2 class="title">Por sector</h2>
+          <p class="muted">Cada línea está formulada para un uso concreto. Si dudas, un asesor te orienta sin costo.</p>
         </div>
-        <div class="sectors" id="sectors"></div>
+        <div class="index" id="sectors"></div>
       </div>
     </section>
 
-    <!-- ============ VALOR ============ -->
-    <section class="section">
-      <div class="container features">
-        <article class="feature">
-          <span class="feature__n">01</span>
-          <h3>Resistencia tropical</h3>
-          <p>Fórmulas con protección UV y antihongos que soportan el calor, la humedad y el salitre.</p>
-        </article>
-        <article class="feature">
-          <span class="feature__n">02</span>
-          <h3>Calidad certificada</h3>
-          <p>Cada lote se prueba en abrasión, solidez del color y adherencia antes de salir del almacén.</p>
-        </article>
-        <article class="feature">
-          <span class="feature__n">03</span>
-          <h3>Asesoría técnica</h3>
-          <p>Te ayudamos a calcular metros y elegir el material correcto para tu proyecto, sin costo.</p>
-        </article>
-        <article class="feature">
-          <span class="feature__n">04</span>
-          <h3>Despacho en 24 h</h3>
-          <p>Cortamos y despachamos tu pedido por MRW, Zoom o Tealca al siguiente día hábil.</p>
-        </article>
+    <!-- ============ MANIFIESTO ============ -->
+    <section class="section section--alt">
+      <div class="container manifest">
+        <p class="manifest__quote">Fabricados para el calor, la humedad y el uso de <em>todos los días.</em></p>
+        <div class="features">
+          <article class="feature"><h3>Resistencia tropical</h3><p>Protección UV y antihongos que soportan sol, salitre y humedad sin cuartearse.</p></article>
+          <article class="feature"><h3>Control por lote</h3><p>Probamos abrasión, solidez del color y adherencia antes de despachar cada rollo.</p></article>
+          <article class="feature"><h3>Asesoría técnica</h3><p>Calculamos contigo los metros y el material adecuado para tu proyecto.</p></article>
+          <article class="feature"><h3>Corte al metro</h3><p>Desde un metro por color, o rollos completos con tarifa de mayorista.</p></article>
+        </div>
       </div>
     </section>
 
     <!-- ============ CÓMO COMPRAR ============ -->
-    <section class="section section--alt" id="como-comprar">
+    <section class="section" id="como-comprar">
       <div class="container">
         <div class="section__head">
-          <div>
-            <p class="eyebrow">Comprar es simple</p>
-            <h2 class="title">Tres pasos y listo</h2>
-          </div>
+          <h2 class="title">Cómo comprar</h2>
         </div>
         <ol class="steps">
-          <li><span>1</span><h3>Elige material y color</h3><p>Abre cualquier producto, selecciona el color e indica los metros que necesitas.</p></li>
-          <li><span>2</span><h3>Completa tu pedido</h3><p>Desde el carrito indica tus datos, el método de entrega y cómo vas a pagar.</p></li>
-          <li><span>3</span><h3>Confirma por WhatsApp</h3><p>Tu pedido llega detallado a nuestro equipo. Te confirmamos stock y datos de pago al instante.</p></li>
+          <li><span>Paso uno</span><h3>Elige material y color</h3><p>Abre el producto, selecciona el color e indica cuántos metros necesitas.</p></li>
+          <li><span>Paso dos</span><h3>Completa tus datos</h3><p>En el carrito indicas cédula o RIF, ciudad, tipo de entrega y forma de pago.</p></li>
+          <li><span>Paso tres</span><h3>Confirma por WhatsApp</h3><p>El pedido nos llega detallado. Confirmamos existencia y te enviamos los datos de pago.</p></li>
         </ol>
         <div class="payments" id="payments"></div>
       </div>
     </section>
 
     <!-- ============ MAYORISTAS ============ -->
-    <section class="section" id="mayoristas">
-      <div class="container">
-        <div class="wholesale">
-          <div class="wholesale__copy">
-            <p class="eyebrow">Fábricas · Tapiceros · Arquitectos</p>
-            <h2 class="title">Precios al mayor y crédito para empresas</h2>
-            <p class="muted">A partir de 50 metros accedes a tarifas escalonadas, reservas de lote por color y despachos programados. Atendemos a fábricas de muebles, concesionarios, astilleros, clínicas y cadenas hoteleras.</p>
-            <ul class="ticks">
-              <li>Descuentos de hasta 18 % por volumen</li>
-              <li>Facturación con RIF y crédito a empresas</li>
-              <li>Desarrollo de colores a pedido desde 500 m</li>
-            </ul>
-            <a class="btn btn--gold" id="wholesale-cta" target="_blank" rel="noopener">Solicitar cotización</a>
-          </div>
+    <section class="section section--alt" id="mayoristas">
+      <div class="container wholesale">
+        <div>
+          <p class="eyebrow">Fábricas · Tapiceros · Arquitectos</p>
+          <h2 class="title">Precios al mayor y crédito a <em>empresas</em></h2>
+          <ul class="ticks">
+            <li>Tarifas escalonadas a partir de 50 metros</li>
+            <li>Facturación con RIF y crédito a empresas</li>
+            <li>Reserva de lote por color y despachos programados</li>
+            <li>Desarrollo de colores a pedido desde 500 metros</li>
+          </ul>
+          <a class="btn btn--gold" id="wholesale-cta" target="_blank" rel="noopener">Solicitar cotización</a>
+        </div>
+        <div>
           <div class="tiers">
-            <div class="tier"><span>1 – 49 m</span><strong>Precio de lista</strong></div>
-            <div class="tier"><span>50 – 199 m</span><strong>−8 %</strong></div>
-            <div class="tier"><span>200 – 499 m</span><strong>−12 %</strong></div>
-            <div class="tier tier--hi"><span>500 m o más</span><strong>−18 %</strong></div>
+            <div class="tiers__head"><span>Volumen</span><span>Descuento</span></div>
+            <div class="tier"><span>1 a 49 metros</span><strong>—</strong></div>
+            <div class="tier"><span>50 a 199 metros</span><strong>8 %</strong></div>
+            <div class="tier"><span>200 a 499 metros</span><strong>12 %</strong></div>
+            <div class="tier tier--hi"><span>500 metros o más</span><strong>18 %</strong></div>
           </div>
+          <p class="tiers__note">Descuento sobre precio de lista, por pedido.</p>
         </div>
       </div>
     </section>
 
     <!-- ============ FAQ ============ -->
-    <section class="section section--alt" id="faq">
+    <section class="section" id="faq">
       <div class="container faq-wrap">
-        <div>
-          <p class="eyebrow">Preguntas frecuentes</p>
-          <h2 class="title">Todo lo que necesitas saber</h2>
-        </div>
+        <h2 class="title">Preguntas frecuentes</h2>
         <div class="faq">
           <details><summary>¿Cuál es la compra mínima?</summary><p>Vendemos desde 1 metro lineal por color. El rollo estándar mide 1,40 m de ancho; para un sofá de tres puestos suelen bastar entre 8 y 10 metros.</p></details>
           <details><summary>¿Puedo pagar en bolívares?</summary><p>Sí. Aceptamos Pago Móvil y transferencia en bolívares a la tasa oficial del día, además de Zelle, Binance Pay y efectivo.</p></details>
@@ -218,25 +187,33 @@
     <!-- ============ CTA FINAL ============ -->
     <section class="section cta-final" id="contacto">
       <div class="container cta-final__inner">
-        <h2 class="display display--sm">¿Tienes un proyecto en mente?</h2>
-        <p class="lead">Cuéntanos qué vas a tapizar y te recomendamos el material ideal en minutos.</p>
-        <a class="btn btn--gold btn--lg" id="contact-cta" target="_blank" rel="noopener">Hablar con un asesor</a>
+        <h2 class="display display--sm">¿Qué vas a <em>tapizar?</em></h2>
+        <div>
+          <p class="lead">Cuéntanos el proyecto y te recomendamos el material, el color y los metros exactos.</p>
+          <div class="cta-final__actions">
+            <a class="btn btn--gold btn--lg" id="contact-cta" target="_blank" rel="noopener">Hablar con un asesor</a>
+            <a class="link" id="contact-mail">Escribir un correo</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
-    <div class="container footer__grid">
-      <div>
-        <a href="#inicio" class="brand"><svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="10" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 11v10a8 8 0 0 0 16 0V11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M12 30h16" stroke="var(--gold)" stroke-width="2.2" stroke-linecap="round"/></svg><span class="brand__text"><strong>Universal</strong><small>de Sintéticos · Venezuela</small></span></a>
-        <p class="muted footer__about">Superficies sintéticas premium para la industria y el diseño venezolano.</p>
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a href="#inicio" class="brand"><strong>Universal</strong><small>de Sintéticos · Venezuela</small></a>
+          <p class="muted footer__about">Cueros sintéticos y textiles recubiertos para la industria y el diseño venezolano.</p>
+        </div>
+        <div><h4>Catálogo</h4><ul id="footer-cats"></ul></div>
+        <div><h4>Contacto</h4><ul id="footer-contact"></ul></div>
+        <div><h4>Horario</h4><p class="muted" id="footer-hours" style="margin:0"></p></div>
       </div>
-      <div><h4>Catálogo</h4><ul id="footer-cats"></ul></div>
-      <div><h4>Contacto</h4><ul id="footer-contact"></ul></div>
-      <div><h4>Horario</h4><p class="muted" id="footer-hours"></p></div>
+      <p class="footer__big" aria-hidden="true">Universal</p>
+      <div class="footer__bottom"><span><span id="year"></span> Universal de Sintéticos Venezuela</span><span>Todos los derechos reservados</span></div>
     </div>
-    <div class="container footer__bottom"><span id="year"></span> Universal de Sintéticos Venezuela. Todos los derechos reservados.</div>
   </footer>
 
   <!-- ============ WHATSAPP FLOTANTE ============ -->
@@ -258,15 +235,15 @@
           <div class="pm__price" id="pm-price"></div>
           <p id="pm-desc"></p>
           <div class="pm__block">
-            <span class="label">Color: <strong id="pm-color-label"></strong></span>
+            <span class="label">Color — <strong id="pm-color-label"></strong></span>
             <div class="colors" id="pm-colors"></div>
           </div>
           <div class="pm__block pm__buy">
             <div class="qty">
               <button type="button" id="pm-minus" aria-label="Menos">−</button>
               <input type="number" id="pm-qty" min="1" step="0.5" value="1" inputmode="decimal" aria-label="Cantidad">
-              <button type="button" id="pm-plus" aria-label="Más">+</button>
               <span class="qty__unit" id="pm-unit">m</span>
+              <button type="button" id="pm-plus" aria-label="Más">+</button>
             </div>
             <button class="btn btn--gold btn--block" id="pm-add">Agregar al carrito</button>
           </div>
@@ -291,24 +268,24 @@
         <div id="cart-step-items">
           <ul class="cart-list" id="cart-list"></ul>
           <div class="cart-empty" id="cart-empty">
-            <div class="swatch swatch--sm" style="--c:#2b2622"></div>
-            <p>Tu carrito está vacío.</p>
+            <p>Tu carrito está vacío</p>
+            <span>Explora el catálogo y elige tus materiales.</span>
             <button class="btn btn--ghost" data-close-cart>Ver catálogo</button>
           </div>
         </div>
 
         <form id="checkout" class="checkout" hidden novalidate>
           <button type="button" class="link-back" id="back-to-cart">← Volver al carrito</button>
-          <div class="field"><label for="c-nombre">Nombre y apellido / Razón social</label><input id="c-nombre" name="nombre" required autocomplete="name"></div>
+          <div class="field"><label for="c-nombre">Nombre o razón social</label><input id="c-nombre" name="nombre" required autocomplete="name"></div>
           <div class="field-row">
             <div class="field"><label for="c-doc">Cédula o RIF</label><input id="c-doc" name="doc" required placeholder="V-12345678"></div>
             <div class="field"><label for="c-tel">Teléfono</label><input id="c-tel" name="tel" required type="tel" autocomplete="tel" placeholder="0414-0000000"></div>
           </div>
           <div class="field"><label for="c-ciudad">Ciudad y estado</label><input id="c-ciudad" name="ciudad" required placeholder="Valencia, Carabobo"></div>
-          <div class="field"><label for="c-entrega">Método de entrega</label><select id="c-entrega" name="entrega" class="select"></select></div>
+          <div class="field"><label for="c-entrega">Entrega</label><select id="c-entrega" name="entrega" class="select"></select></div>
           <div class="field" id="c-dir-wrap"><label for="c-dir">Dirección u oficina de envío</label><input id="c-dir" name="dir" placeholder="Oficina MRW o dirección exacta"></div>
-          <fieldset class="field"><legend>Método de pago</legend><div class="pay-options" id="c-pagos"></div></fieldset>
-          <div class="field"><label for="c-notas">Notas (opcional)</label><textarea id="c-notas" name="notas" rows="2" placeholder="Ej. necesito factura, corte en piezas de 2 m…"></textarea></div>
+          <fieldset class="field"><legend>Forma de pago</legend><div class="pay-options" id="c-pagos"></div></fieldset>
+          <div class="field"><label for="c-notas">Notas (opcional)</label><textarea id="c-notas" name="notas" rows="2" placeholder="Ej. necesito factura, corte en piezas de 2 m"></textarea></div>
           <p class="form-error" id="form-error" hidden>Completa los campos marcados para continuar.</p>
         </form>
       </div>
@@ -319,12 +296,12 @@
           <div class="muted" id="cart-ship-note"></div>
           <div class="muted" id="cart-bs"></div>
         </div>
-        <button class="btn btn--gold btn--block" id="to-checkout">Continuar con el pedido</button>
+        <button class="btn btn--gold btn--block" id="to-checkout">Continuar</button>
         <button class="btn btn--wa btn--block" id="send-order" hidden>
           <svg viewBox="0 0 32 32"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3Z"/></svg>
           Enviar pedido por WhatsApp
         </button>
-        <p class="tiny muted">Te confirmaremos disponibilidad y datos de pago antes de cobrar.</p>
+        <p class="tiny muted">Confirmamos existencia y datos de pago antes de cobrar.</p>
       </div>
     </div>
   </aside>
