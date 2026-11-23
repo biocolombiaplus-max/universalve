@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panel de productos · Universal</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    body { background: var(--bg); }
+    .admin { padding: 40px 0 80px; }
+    .admin__head { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 28px; }
+    .admin__head h1 { font-family: var(--serif); font-weight: 400; font-size: 40px; margin: 0; }
+    .admin__layout { display: grid; grid-template-columns: 360px 1fr; gap: 24px; align-items: start; }
+    .panel { background: var(--bg-2); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
+    .plist { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-height: 70vh; overflow: auto; }
+    .plist button { width: 100%; display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 12px; text-align: left; border: 1px solid transparent; }
+    .plist button:hover { background: var(--bg-3); }
+    .plist button.active { border-color: var(--gold); background: var(--bg-3); }
+    .plist .swatch--sm { width: 40px; height: 40px; border-radius: 10px; flex: none; }
+    .plist small { display: block; color: var(--muted); font-size: 12px; }
+    .form { display: grid; gap: 16px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    .checks { display: flex; gap: 20px; flex-wrap: wrap; }
+    .checks label { display: flex; gap: 8px; align-items: center; font-size: 14px; }
+    .checks input { accent-color: var(--gold); width: 18px; height: 18px; }
+    .crow { display: grid; grid-template-columns: 48px 1fr 40px; gap: 8px; align-items: center; margin-bottom: 8px; }
+    .crow input[type=color] { width: 48px; height: 44px; padding: 2px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--bg); }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 18px; }
+    .help { font-size: 13px; color: var(--muted); margin: 0; }
+    .note { background: rgba(201,164,106,.08); border: 1px solid rgba(201,164,106,.3); border-radius: 14px; padding: 14px 18px; font-size: 14px; margin-bottom: 24px; }
+    .note code { color: var(--gold-2); }
+    .btn--danger { border: 1px solid rgba(224,122,95,.5); color: var(--danger); }
+    @media (max-width: 900px) { .admin__layout { grid-template-columns: 1fr; } .grid3, .grid2 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="container admin">
+    <div class="admin__head">
+      <div>
+        <p class="eyebrow">Universal de Sintéticos</p>
+        <h1>Panel de productos</h1>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="index.html" class="btn btn--ghost">Ver tienda</a>
+        <button class="btn btn--gold" id="download">Descargar productos.js</button>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Cómo funciona:</strong> agrega o edita productos aquí. Los cambios se guardan como borrador en este navegador.
+      Cuando termines, pulsa <strong>Descargar productos.js</strong> y reemplaza el archivo <code>assets/js/productos.js</code> de la web por el descargado.
+      Las fotos van en <code>assets/img/</code>.
+    </div>
+
+    <div class="admin__layout">
+      <aside class="panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <strong id="count"></strong>
+          <button class="btn btn--ghost" style="height:38px;padding:0 16px" id="new">+ Nuevo</button>
+        </div>
+        <ul class="plist" id="plist"></ul>
+        <button class="remove" id="reset" style="margin-top:14px">Descartar borrador y recargar archivo original</button>
+      </aside>
+
+      <section class="panel">
+        <form class="form" id="form" novalidate>
+          <div class="grid2">
+            <div class="field"><label>Nombre *</label><input name="nombre" required></div>
+            <div class="field"><label>ID (sin espacios) *</label><input name="id" required pattern="[a-z0-9-]+" placeholder="se genera del nombre"></div>
+          </div>
+          <div class="field"><label>Subtítulo / línea</label><input name="linea"></div>
+          <div class="grid3">
+            <div class="field"><label>Categoría *</label><select name="categoria" class="select" id="f-cat"></select></div>
+            <div class="field"><label>Precio USD *</label><input name="precio" type="number" step="0.01" min="0" required></div>
+            <div class="field"><label>Precio antes (oferta)</label><input name="precioAntes" type="number" step="0.01" min="0"></div>
+          </div>
+          <div class="grid3">
+            <div class="field"><label>Ancho</label><input name="ancho" placeholder="1,40 m"></div>
+            <div class="field"><label>Espesor</label><input name="espesor" placeholder="1,0 mm"></div>
+            <div class="field"><label>Se vende por</label><select name="unidad" class="select"><option value="">Metro</option><option value="unidad">Unidad</option></select></div>
+          </div>
+          <div class="field"><label>Composición</label><input name="composicion"></div>
+          <div class="field"><label>Descripción</label><textarea name="descripcion" rows="3"></textarea></div>
+          <div class="grid2">
+            <div class="field"><label>Usos (separados por coma)</label><input name="usos"></div>
+            <div class="field"><label>Atributos técnicos (separados por coma)</label><input name="atributos"></div>
+          </div>
+          <div class="field"><label>Foto (opcional) — ruta, ej. assets/img/vertice.jpg</label><input name="imagen"></div>
+          <div class="field">
+            <label>Colores *</label>
+            <div id="colors"></div>
+            <button type="button" class="btn btn--ghost" style="height:40px;justify-self:start" id="add-color">+ Agregar color</button>
+          </div>
+          <div class="checks">
+            <label><input type="checkbox" name="destacado"> Destacado</label>
+            <label><input type="checkbox" name="nuevo"> Nuevo</label>
+            <label><input type="checkbox" name="stock" checked> Disponible (desmarca = bajo pedido)</label>
+          </div>
+          <p class="form-error" id="err" hidden></p>
+          <div class="actions">
+            <button type="button" class="btn btn--danger" id="del">Eliminar</button>
+            <button type="submit" class="btn btn--gold">Guardar producto</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/productos.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
