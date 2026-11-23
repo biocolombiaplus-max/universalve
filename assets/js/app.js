@@ -43,8 +43,12 @@
   function swatch(p, colorIdx = 0, cls = "") {
     const c = p.colores[colorIdx] || p.colores[0];
     if (p.imagen) return `<div class="swatch swatch--img ${cls}" style="--img:url('${esc(p.imagen)}')"></div>`;
-    return `<div class="swatch ${cls}" style="--c:${esc(c.hex)}"></div>`;
+    return `<div class="swatch tex-${esc(p.textura || "grano")} ${cls}" style="--c:${esc(c.hex)}"></div>`;
   }
+  const isLight = (hex) => {
+    const n = parseInt(String(hex).replace("#", ""), 16);
+    return ((n >> 16) * 299 + ((n >> 8) & 255) * 587 + (n & 255) * 114) / 1000 > 160;
+  };
   function priceHTML(p) {
     const old = p.precioAntes ? `<s>${money(p.precioAntes)}</s>` : "";
     return `${old}${money(p.precio)} <small>/ ${p.unidad === "unidad" ? "unidad" : "metro"}</small>`;
@@ -94,6 +98,7 @@
           <div class="card__media" data-open>
             <div class="card__badges">${badges}</div>
             ${swatch(p)}
+            ${p.imagen ? "" : `<div class="seam seam--h" style="--thread:${isLight(p.colores[0].hex) ? "#9b8f7e" : "#e9dcc4"}"></div>`}
             <button class="card__quick" data-open>Elegir color y metros</button>
           </div>
           <div class="card__body">
@@ -102,6 +107,7 @@
               <span class="price">${priceHTML(p)}</span>
             </div>
             <p class="card__line">${esc(p.linea)}</p>
+            ${p.ref ? `<span class="card__ref">Ref. ${esc(p.ref)}</span>` : ""}
             <div class="card__meta">
               <div class="card__dots">${dots}${more}</div>
               <span class="card__stock${p.stock === false ? " pedido" : ""}">${p.stock === false ? "Bajo pedido" : esc(p.ancho)}</span>
@@ -113,15 +119,29 @@
 
   /* ---------------- Sectores / pagos / footer ---------------- */
   function renderStatic() {
-    $("#sectors").innerHTML = Object.entries(CATS).map(([k, v], i) => {
-      const tones = PRODUCTS.filter((p) => p.categoria === k).flatMap((p) => p.colores).slice(0, 5);
+    // Mosaico de colecciones: categoría → textura, color, hilo, tamaño
+    const TILES = [
+      ["tapiceria", "capitone", "#7a3f22", "#e9dcc4", "big"],
+      ["automotriz", "perforado", "#1e1d1c", "#b23a2a", "wide"],
+      ["nautico", "grano", "#efece4", "#1f3f66", "light"],
+      ["salud", "liso", "#2f6f9f", "#e9eef2", ""],
+      ["calzado", "croco", "#3a4a31", "#e9dcc4", "wide"],
+      ["eco", "gamuza", "#8c9a7e", "#f2ede3", "wide"]
+    ];
+    $("#bento").innerHTML = TILES.filter(([k]) => CATS[k]).map(([k, tex, hex, thread, size], i) => {
+      const n = PRODUCTS.filter((p) => p.categoria === k).length;
+      const light = size === "light" || isLight(hex);
+      const cls = ["tile", size === "big" ? "tile--big" : "", size === "wide" ? "tile--wide" : "", light ? "tile--light" : ""].join(" ");
+      const seam = size === "big" ? "" : `<div class="seam seam--h" style="--thread:${thread};bottom:auto;top:27%"></div>`;
       return `
-      <button class="index__row" data-sector="${k}">
-        <span class="index__n">${String(i + 1).padStart(2, "0")}</span>
-        <span><span class="index__name">${esc(v.nombre)}</span>
-          <span class="index__chips">${tones.map((c) => `<i style="--c:${esc(c.hex)}"></i>`).join("")}</span></span>
-        <span class="index__desc">${esc(SECTOR_COPY[k] || "")}</span>
-        <span class="index__go"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <button class="${cls}" data-sector="${k}">
+        <div class="swatch tex-${tex}" style="--c:${hex}"></div>${seam}
+        <span class="tile__ref">${n} ${n === 1 ? "referencia" : "referencias"}</span>
+        <span class="tile__body">
+          <span><span class="tile__n">Colección ${String(i + 1).padStart(2, "0")}</span>
+            <h3>${esc(CATS[k].nombre)}</h3><p>${esc(SECTOR_COPY[k] || "")}</p></span>
+          <span class="tile__go"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
       </button>`;
     }).join("");
 
@@ -141,14 +161,19 @@
     $("#contact-cta").href = hello;
     $("#wholesale-cta").href = waLink("Hola, quiero cotizar precios al mayor. Empresa: ___  Material: ___  Metros aprox.: ___");
 
-    // Libro de muestras del hero: [producto, índice de color]
-    const picks = [["vertice-pu", 2], ["vertice-pu", 0], ["marina-pro", 1], ["vertice-pu", 4], ["nobuk-soft", 0]]
-      .map(([id, ci]) => [byId(id), ci]).filter(([p]) => p && p.colores[0]);
-    $("#swatch-book").innerHTML = picks.map(([p, ci]) => {
+    $("#nav-wa").href = hello;
+
+    // Abanico de muestras del hero: [producto, índice de color]
+    const picks = [["vertice-pu", 5], ["vertice-pu", 2], ["nobuk-soft", 0], ["marina-pro", 1], ["vertice-pu", 4], ["vertice-pu", 0]]
+      .map(([id, ci]) => [byId(id), ci]).filter(([p]) => p);
+    const n = picks.length;
+    $("#fan").innerHTML = picks.map(([p, ci], i) => {
       const c = p.colores[ci] || p.colores[0];
-      return `<figure data-product="${esc(p.id)}" data-color="${ci}"><div class="swatch" style="--c:${esc(c.hex)}"></div>
-        <figcaption><b>${esc(p.nombre)}</b><span>${esc(c.nombre)}</span></figcaption></figure>`;
-    }).join("");
+      const r1 = -34 + i * (58 / (n - 1)), r2 = -46 + i * (80 / (n - 1));
+      return `<div class="fan__blade" style="--r1:${r1}deg;--r2:${r2}deg;z-index:${i + 1}" data-product="${esc(p.id)}" data-color="${ci}">
+        <div class="swatch tex-${esc(p.textura || "grano")}" style="--c:${esc(c.hex)}"></div>
+        <b>${esc(p.ref || p.nombre)}<small>${esc(c.nombre)}</small></b></div>`;
+    }).join("") + '<span class="fan__pin"></span>';
   }
 
   /* ---------------- Ficha de producto ---------------- */
@@ -162,6 +187,8 @@
     const u = unitOf(p);
     $("#pm-cat").textContent = CATS[p.categoria]?.nombre || "";
     $("#pm-title").textContent = p.nombre;
+    $("#pm-ref").textContent = p.ref ? "Ref. " + p.ref : "";
+    $("#pm-ref").hidden = !p.ref;
     $("#pm-line").textContent = p.linea;
     $("#pm-price").innerHTML = priceHTML(p);
     $("#pm-desc").textContent = p.descripcion;
@@ -186,7 +213,9 @@
     const p = state.current, c = p.colores[state.color];
     const sw = $("#pm-swatch");
     if (p.imagen) { sw.className = "swatch swatch--xl swatch--img"; sw.style.setProperty("--img", `url('${p.imagen}')`); }
-    else { sw.className = "swatch swatch--xl"; sw.style.setProperty("--c", c.hex); }
+    else { sw.className = `swatch swatch--xl tex-${p.textura || "grano"}`; sw.style.setProperty("--c", c.hex); }
+    $("#pm-seam").hidden = !!p.imagen;
+    $("#pm-seam").style.setProperty("--thread", isLight(c.hex) ? "#9b8f7e" : "#e9dcc4");
     $("#pm-color-name").textContent = c.nombre;
     $("#pm-color-label").textContent = c.nombre;
     $$("#pm-colors .color-opt").forEach((b, i) => b.setAttribute("aria-checked", i === state.color));
@@ -250,7 +279,7 @@
       const step = u === "m" ? 0.5 : 1, min = u === "m" ? CFG.minimoMetros : 1;
       return `
         <li class="cart-item" data-key="${esc(i.key)}">
-          <div class="swatch swatch--sm" style="--c:${esc(i.hex)}"></div>
+          <div class="swatch swatch--sm tex-${esc(p.textura || "grano")}" style="--c:${esc(i.hex)}"></div>
           <div>
             <h4>${esc(p.nombre)}</h4>
             <p>${esc(i.color)} · ${money(p.precio)}/${u}</p>
@@ -374,7 +403,10 @@
       if (dot) {
         const idx = +dot.dataset.dot;
         $$(".dot", card).forEach((d) => d.classList.toggle("active", d === dot));
-        if (!p.imagen) $(".card__media .swatch", card).style.setProperty("--c", p.colores[idx].hex);
+        if (!p.imagen) {
+          $(".card__media .swatch", card).style.setProperty("--c", p.colores[idx].hex);
+          $(".card__media .seam", card)?.style.setProperty("--thread", isLight(p.colores[idx].hex) ? "#9b8f7e" : "#e9dcc4");
+        }
         card.dataset.color = idx;
         return;
       }

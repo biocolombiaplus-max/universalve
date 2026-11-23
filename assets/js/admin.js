@@ -21,7 +21,7 @@
     $("#count").textContent = `${list.length} productos`;
     $("#plist").innerHTML = list.map((p) => `
       <li><button data-id="${esc(p.id)}" class="${p.id === currentId ? "active" : ""}">
-        <span class="swatch swatch--sm" style="--c:${esc(p.colores?.[0]?.hex || "#555")}"></span>
+        <span class="swatch swatch--sm tex-${esc(p.textura || "grano")}" style="--c:${esc(p.colores?.[0]?.hex || "#555")}"></span>
         <span><strong>${esc(p.nombre)}</strong><small>${esc(CATS[p.categoria]?.nombre || p.categoria)} · $${p.precio}</small></span>
       </button></li>`).join("");
   }
@@ -73,7 +73,7 @@
 
     const split = (s) => s.split(",").map((x) => x.trim()).filter(Boolean);
     const p = {
-      id, nombre: f.nombre.value.trim(), linea: f.linea.value.trim(), categoria: f.categoria.value,
+      id, ...(f.ref.value.trim() ? { ref: f.ref.value.trim() } : {}), textura: f.textura.value, nombre: f.nombre.value.trim(), linea: f.linea.value.trim(), categoria: f.categoria.value,
       precio: +(+f.precio.value).toFixed(2),
       ...(f.precioAntes.value ? { precioAntes: +(+f.precioAntes.value).toFixed(2) } : {}),
       ancho: f.ancho.value.trim(), composicion: f.composicion.value.trim(), espesor: f.espesor.value.trim(),

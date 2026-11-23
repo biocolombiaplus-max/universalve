@@ -31,6 +31,9 @@ pulsa **Descargar productos.js** y reemplaza `assets/js/productos.js` por el arc
 **Opción manual:** en `assets/js/productos.js` copia un bloque `{ ... }`, pégalo al final de la
 lista y cambia los datos. Cada campo está explicado al inicio del archivo.
 
+Cada producto lleva `ref` (código, ej. `VT-1402`) y `textura`
+(`grano`, `liso`, `gamuza`, `croco`, `perforado` o `capitone`), que define cómo se dibuja la muestra.
+
 Fotos: sube la imagen a `assets/img/` y escribe su ruta en el campo `imagen`
 (ej. `assets/img/vertice.jpg`). Sin foto, la tienda dibuja una muestra con textura de cuero en el color elegido.
 

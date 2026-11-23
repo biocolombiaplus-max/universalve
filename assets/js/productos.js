@@ -19,6 +19,8 @@
      usos        lista de aplicaciones
      atributos   lista de etiquetas técnicas
      colores     lista de { nombre, hex }   (el hex pinta la muestra)
+     ref         código de referencia, ej. "VT-1402"
+     textura     grano | liso | gamuza | croco | perforado | capitone
      imagen      (opcional) ruta a una foto, ej. "assets/img/vertice.jpg"
      destacado   true para mostrarlo con la etiqueta "Destacado"
      nuevo       true para mostrar la etiqueta "Nuevo"
@@ -37,6 +39,8 @@ window.CATEGORIAS = {
 window.PRODUCTOS = [
   {
     id: "vertice-pu",
+    ref: "VT-1402",
+    textura: "grano",
     nombre: "Vértice",
     linea: "Poliuretano premium de tacto natural",
     categoria: "tapiceria",
@@ -60,6 +64,8 @@ window.PRODUCTOS = [
   },
   {
     id: "atlas-pvc",
+    ref: "AT-1100",
+    textura: "liso",
     nombre: "Atlas",
     linea: "PVC de alto tráfico",
     categoria: "tapiceria",
@@ -82,6 +88,8 @@ window.PRODUCTOS = [
   },
   {
     id: "andes-auto",
+    ref: "AN-1210",
+    textura: "grano",
     nombre: "Andes",
     linea: "Tapicería automotriz OEM",
     categoria: "automotriz",
@@ -103,6 +111,8 @@ window.PRODUCTOS = [
   },
   {
     id: "andes-perforado",
+    ref: "AP-1215",
+    textura: "perforado",
     nombre: "Andes Perforado",
     linea: "Versión transpirable para asientos",
     categoria: "automotriz",
@@ -123,6 +133,8 @@ window.PRODUCTOS = [
   },
   {
     id: "marina-pro",
+    ref: "MP-1370",
+    textura: "grano",
     nombre: "Marina Pro",
     linea: "Náutico con protección UV y antihongos",
     categoria: "nautico",
@@ -144,6 +156,8 @@ window.PRODUCTOS = [
   },
   {
     id: "terra-outdoor",
+    ref: "TR-0940",
+    textura: "liso",
     nombre: "Terra",
     linea: "Exterior para hotelería y jardín",
     categoria: "nautico",
@@ -163,6 +177,8 @@ window.PRODUCTOS = [
   },
   {
     id: "clinica-shield",
+    ref: "CS-1010",
+    textura: "liso",
     nombre: "Clínica Shield",
     linea: "Antibacterial para el sector salud",
     categoria: "salud",
@@ -186,6 +202,8 @@ window.PRODUCTOS = [
   },
   {
     id: "bravo-calzado",
+    ref: "BR-1300",
+    textura: "liso",
     nombre: "Bravo",
     linea: "Sintético para calzado y marroquinería",
     categoria: "calzado",
@@ -206,6 +224,8 @@ window.PRODUCTOS = [
   },
   {
     id: "lux-croco",
+    ref: "LC-1220",
+    textura: "croco",
     nombre: "Lux Croco",
     linea: "Grabado de cocodrilo",
     categoria: "calzado",
@@ -226,6 +246,8 @@ window.PRODUCTOS = [
   },
   {
     id: "nobuk-soft",
+    ref: "NS-0800",
+    textura: "gamuza",
     nombre: "Nobuk Soft",
     linea: "Microfibra efecto gamuza",
     categoria: "tapiceria",
@@ -246,6 +268,8 @@ window.PRODUCTOS = [
   },
   {
     id: "origen-eco",
+    ref: "OR-1000",
+    textura: "grano",
     nombre: "Origen",
     linea: "Base de fibra PET reciclada",
     categoria: "eco",
@@ -266,6 +290,8 @@ window.PRODUCTOS = [
   },
   {
     id: "muestrario",
+    ref: "MU-2026",
+    textura: "capitone",
     nombre: "Muestrario profesional",
     linea: "Todas las líneas en un solo libro",
     categoria: "eco",
